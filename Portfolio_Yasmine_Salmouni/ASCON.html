@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Modélisation de l'algorithme de chiffrement ASCON128</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="favicon.ico" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet" />
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="css/animate.css" />
+  <!-- Icomoon Icon Fonts -->
+  <link rel="stylesheet" href="css/icomoon.css" />
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="css/magnific-popup.css" />
+  <!-- Custom style -->
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Modernizr JS -->
+  <script src="js/modernizr-2.6.2.min.js"></script>
+  <!-- FOR IE9 below -->
+  <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-decoration: none;
+      color: #000;
+      font-size: 24px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .scroll-down:hover {
+      color: #555;
+    }
+
+    #colorlib-home {
+      padding-top: 100px; /* Ajustez cette valeur selon vos besoins */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="project.html">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="colorlib-navbar-brand">
+            <a class="colorlib-logo" href="index.html">
+              <img src="images/logo.png" alt="Mon Logo" style="max-height: 100px;">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <h1>Modélisation de l'algorithme de chiffrement ASCON128 en SystemVerilog</h1>
+
+    <h2 style="text-align: left; margin-left: 20px;">Contexte du projet</h2>
+    <p style="text-align: left; margin-left: 20px;">
+      ASCON128 est un algorithme qui permet de chiffrer le contenu d’un message garantissant que seul le destinataire puisse le lire (confidentialité), et de vérifier que le message n’a pas été altéré en cours de route grâce à un ”tag” d’authenticité. Ainsi, cet algorithme sécurise les données sensibles tout en assurant que l’identité des communicateurs est vérifiée. 
+    </p>
+    <p style="text-align: left; margin-left: 20px;">
+      Le projet présenté ici consiste à modéliser cet algorithme à travers un système numérique, en utilisant le langage SystemVerilog. L’objectif est de développer une version simplifiée de l'algorithme ASCON128 pour mieux comprendre son fonctionnement.
+    </p>
+
+    <h2 style="text-align: left; margin-left: 20px;">Description de l'algorithme ASCON128</h2>
+    <p style="text-align: left; margin-left: 20px;">
+      L’algorithme agit sur un état courant (state S), qui a une taille de 320 bits. Un state S peut être vu comme un tableau de cinq registres de 64 bits chacun ou 64 colonnes de 5 bits chacune.
+    </p>
+    <ul>
+      <li style="text-align: left; margin-left: 20px;">Une partie externe de r = 64 bits, Sr = S64.</li>
+      <li style="text-align: left; margin-left: 20px;">Une partie interne de c = 256 bits, Sc = S256.</li>
+    </ul>
+    <p style="text-align: left; margin-left: 20px;">
+      Il utilise une clé secrète (K), un nombre arbitraire (Nonce N), un texte clair (P), un texte chiffré (C), des données associées (A), et un vecteur d'initialisation (IV).
+    </p>
+
+    <p style="text-align: left; margin-left: 20px;">Les principales étapes du chiffrement avec ASCON128 sont :</p>
+    <ul>
+      <li style="text-align: left; margin-left: 20px;"><strong>Initialisation :</strong> L'état courant est initialisé avec une combinaison du vecteur d'initialisation (IV), de la clé secrète et d'un nonce.</li>
+      <li style="text-align: left; margin-left: 20px;"><strong>Traitement des données associées :</strong> Les données associées, qui ne sont pas à chiffrer mais à protéger, sont incorporées à l’état courant via des opérations XOR et des permutations.</li>
+      <li style="text-align: left; margin-left: 20px;"><strong>Chiffrement du texte clair :</strong> Le texte clair est chiffré en plusieurs étapes, et le texte chiffré est extrait au fur et à mesure.</li>
+      <li style="text-align: left; margin-left: 20px;"><strong>Finalisation :</strong> Un tag d'authenticité est généré à partir de l’état courant pour garantir que le message n’a pas été modifié.</li>
+    </ul>
+
+    <h2 style="text-align: left; margin-left: 20px;">Conception numérique avec SystemVerilog</h2>
+    <p style="text-align: left; margin-left: 20px;">
+      Dans ce projet, nous avons utilisé <strong>SystemVerilog</strong>, un langage de description matériel (HDL - Hardware Description Language) qui permet de modéliser des circuits numériques. Ce langage est principalement utilisé pour concevoir des systèmes embarqués et des circuits logiques complexes. L’objectif principal de cette étape était de créer une version simplifiée de l'algorithme de chiffrement ASCON128, tout en reproduisant ses différentes étapes de manière fidèle.
+    </p>
+
+    <h3 style="text-align: left; margin-left: 20px;">1. Machine à états finis</h3>
+    <p style="text-align: left; margin-left: 20px;">
+      Une machine à états finis est un modèle très utilisé en conception numérique pour décrire des systèmes qui passent par différents états selon les données qu'ils reçoivent. Elle est composée de plusieurs "états" et de règles qui dictent comment le système passe d’un état à un autre. Cela permet de structurer le fonctionnement global du système, en s’assurant qu’il respecte les bonnes étapes dans le bon ordre.
+    </p>
+    <p style="text-align: left; margin-left: 20px;">
+      Dans notre projet, nous avons utilisé une <strong>machine à états de type Mealy</strong>. Ce type de machine se distingue par le fait que les <strong>sorties</strong> du système dépendent non seulement de l'état courant du système, mais aussi des <strong>entrées</strong> qu'il reçoit. Cela permet une plus grande flexibilité dans la gestion des changements d'états et des signaux de contrôle. Concrètement, cette machine pilote l'ensemble du processus de chiffrement, assurant que les données soient traitées dans le bon ordre (initialisation, chiffrement, authentification).
+    </p>
+
+    <h3 style="text-align: left; margin-left: 20px;">2. Permutation et opérations XOR</h3>
+    <p style="text-align: left; margin-left: 20px;">
+      L'un des composants centraux de l’algorithme ASCON128 est la <strong>permutation</strong>. En cryptographie, une permutation est une transformation qui mélange les bits d’un message ou d'un état courant pour rendre les données plus difficiles à analyser ou à attaquer. Cela améliore la sécurité du chiffrement en rendant le résultat imprévisible.
+    </p>
+    <p style="text-align: left; margin-left: 20px;">
+      Dans notre modèle, la permutation est décomposée en plusieurs sous-opérations :
+    </p>
+    <ul style="text-align: left; margin-left: 20px;">
+      <li style="text-align: left; margin-left: 20px;"><strong>L'addition de constantes :</strong> Cette étape consiste à ajouter (via un XOR) des constantes prédéfinies à certains bits de l'étatcourant. Ces constantes changent à chaque itération de la permutation, assurant que le chiffrement varie à chaque tour.</li>
+      <li style="text-align: left; margin-left: 20px;"><strong>La substitution :</strong> Ici, chaque groupe de bits est remplacé par un autre groupe, selon une table de correspondance fixe (appelée S-Box). Cette opération renforce encore la sécurité en compliquant l’analyse des bits.</li>
+      <li style="text-align: left; margin-left: 20px;"><strong>La diffusion :</strong> Cette opération mélange les bits d'une manière particulière pour s'assurer que les changements sur un seul bit au début du processus peuvent affecter de nombreux bits à la fin. Cela augmente la résistance contre les attaques par cryptanalyse.</li>
+    </ul>
+
+    <p style="text-align: left; margin-left: 20px;">
+      Chaque sous-opération a été modélisée dans un <strong>module SystemVerilog</strong> distinct pour plus de clarté et de modularité. Ces modules ont ensuite été assemblés pour former la permutation complète.
+    </p>
+
+    <h3 style="text-align: left; margin-left: 20px;">3. Simulation des modules</h3>
+    <p style="text-align: left; margin-left: 20px;">
+      Une fois que chaque module du système (comme la permutation et les opérations XOR) a été implémenté, il est essentiel de vérifier leur fonctionnement. C'est là qu'intervient la phase de <strong>simulation</strong>.
+    </p>
+    <p style="text-align: left; margin-left: 20px;">
+      Dans ce projet, chaque module a été testé individuellement à l'aide de <strong>bancs de test</strong> (ou <strong>testbenches</strong>). Un banc de test est un ensemble de scénarios qui simulent l'entrée de données dans le module pour voir comment il réagit et s'assurer qu'il produit les résultats attendus.
+    </p>
+    <p style="text-align: left; margin-left: 20px;">
+      La simulation permet d’identifier des erreurs dans la conception avant de passer à la prochaine étape, ce qui garantit la fiabilité du système.
+    </p>
+    <p style="text-align: left; margin-left: 20px;">
+      En plus de tester les modules individuellement, une simulation finale a été effectuée sur la permutation finale et le système global pour vérifier que l'ensemble des composants fonctionne correctement ensemble.
+    </p>
+    <p>
+        <a href="./pdfs/ASCON128.pdf" class="btn btn-primary btn-outline" target="_blank"> Learn more about this project here </a>
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+            &copy; 
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            ASCON128 Project
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery -->
+  <script src="js/jquery.min.js"></script>
+  <!-- jQuery Easing -->
+  <script src="js/jquery.easing.1.3.js"></script>
+  <!-- Bootstrap -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- Waypoints -->
+  <script src="js/jquery.waypoints.min.js"></script>
+  <!-- Owl Carousel -->
+  <script src="js/owl.carousel.min.js"></script>
+  <!-- Magnific Popup -->
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/magnific-popup-options.js"></script>
+  
+  <!-- Main JS (Do not remove) -->
+  <script src="js/main.js"></script>
+</body>
+</html>

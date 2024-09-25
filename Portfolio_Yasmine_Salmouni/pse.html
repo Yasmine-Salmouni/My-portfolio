@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Application Multithread Client/Serveur pour la Réservation de Chambres à l'Hôtel California</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet" />
+  <link rel="stylesheet" href="css/animate.css" />
+  <link rel="stylesheet" href="css/icomoon.css" />
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <link rel="stylesheet" href="css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+  <link rel="stylesheet" href="css/magnific-popup.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/modernizr-2.6.2.min.js"></script>
+  <style>
+    .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-decoration: none;
+      color: #000;
+      font-size: 24px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+    .scroll-down:hover {
+      color: #555;
+    }
+    #colorlib-home {
+      padding-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="project.html">Projects</a></li>
+    </ul>
+  </nav>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="colorlib-navbar-brand">
+            <a class="colorlib-logo" href="index.html">
+              <img src="images/logo.png" alt="Logo Hôtel California" style="max-height: 100px;">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <h1>Application Multithread Client/Serveur pour la Réservation de Chambres à l’Hôtel California</h1>
+    <h2 style="text-align: left; margin-left: 20px;">But du Projet</h2>
+    <p style="text-align: left; margin-left: 20px;">
+      Développer une application client/serveur permettant la gestion des réservations de chambres à l'Hôtel California. Cette application utilise des sockets TCP/IP et est multithread, ce qui lui permet de gérer plusieurs clients simultanément.
+    </p>
+    <h2 style="text-align: left; margin-left: 20px;">Organisation des Programmes</h2>
+    <h3 style="text-align: left; margin-left: 20px;">Module Serveur</h3>
+    <ul style="text-align: left; margin-left: 40px;">
+      <li>Initialisation et Écoute : Définition de constantes comme le port du serveur et le nombre de chambres, initialisation d'un mutex pour synchroniser l'accès à la liste des chambres disponibles et création d’un socket pour écouter les demandes de connexion.</li>
+      <li>Gestion des Connexions : À chaque tentative de connexion d'un client, le serveur accepte la connexion et crée un nouveau thread spécifique à ce client. Ce thread gère toutes les interactions avec le client connecté, permettant au socket principal de continuer à écouter d'autres demandes.</li>
+      <li>Multithreading : Chaque thread client fonctionne de manière autonome pour répondre aux requêtes du client. Un thread dédié est créé pour chaque chambre réservée, s'occupant spécifiquement de la réservation de cette chambre, de la gestion des services associés (comme le petit-déjeuner et le Wi-Fi), et de la synchronisation des données de disponibilité des chambres avec les autres threads en utilisant des mutex.</li>
+      <li>Libération des Ressources : Après la période de réservation, un thread spécifique est lancé pour libérer la chambre, permettant ainsi de la remettre à disposition pour de nouvelles réservations.</li>
+    </ul>
+    <h3 style="text-align: left; margin-left: 20px;">Module Client</h3>
+    <p style="text-align: left; margin-left: 20px;">Les clients créent un socket pour se connecter au serveur, envoient leurs demandes de réservation (nombre de chambres, durée du séjour, services supplémentaires), et reçoivent les confirmations et les informations sur les chambres disponibles.</p>
+    <h2 style="text-align: left; margin-left: 20px;">Améliorations Futures</h2>
+    <p style="text-align: left; margin-left: 20px;">Précision des Réservations : Implémentation d'une fonctionnalité demandant les dates de début et de fin de séjour pour chaque réservation, améliorant ainsi la précision de la gestion des disponibilités des chambres.</p>
+    <h2 style="text-align: left; margin-left: 20px;">Mise en Œuvre d’une Simulation de Réservation à l'Hôtel California</h2>
+    <p style="text-align: left; margin-left: 20px;">Scénario de Simulation : Une famille désirant planifier des vacances bien méritées, choisit de réserver deux chambres à l'Hôtel California pour un séjour de cinq jours. Ils réservent une chambre double et une chambre triple, spécifiant des services comme le petit déjeuner inclus pour tous mais sans Wi-Fi pour les chambres des enfants pour favoriser le temps familial hors ligne. Cette simulation démontre le processus complet de réservation via l'application, de la sélection des chambres à la confirmation des services.</p>
+    <p>
+      <a href="./pdfs/pse.pdf" class="btn btn-primary btn-outline" target="_blank"> Learn more about this project here </a>
+    </p>
+  </div>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>&copy; <script>document.write(new Date().getFullYear());</script> Hôtel California Project</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/magnific-popup-options.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

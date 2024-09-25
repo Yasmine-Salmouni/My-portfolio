@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Yasmine Salmouni - Jeu Mario Bros Piloté par Capteur Capacitif</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="favicon.ico" />
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet" />
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="css/animate.css" />
+  <!-- Icomoon Icon Fonts-->
+  <link rel="stylesheet" href="css/icomoon.css" />
+  <!-- Bootstrap  -->
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="css/magnific-popup.css" />
+  <!-- custom style -->
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Modernizr JS -->
+  <script src="js/modernizr-2.6.2.min.js"></script>
+  <!-- FOR IE9 below -->
+  <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-decoration: none;
+      color: #000;
+      font-size: 24px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .scroll-down:hover {
+      color: #555;
+    }
+
+    #colorlib-home {
+      padding-top: 100px; /* Ajustez cette valeur selon vos besoins */
+    }
+  </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="project.html">Projects</a></li>
+      </ul>
+    </nav> 
+     <!-- header -->
+     <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="colorlib-navbar-brand">
+              <a class="colorlib-logo" href="index.html">
+                <img src="images/logo.png" alt="Mon Logo" style="max-height: 100px;">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    
+    <h1>Jeu Mario Bros Piloté par Capteur Capacitif</h1>
+
+    <h2 style="text-align: left; margin-left: 20px;">Contrat de Projet</h2>
+    <p style="text-align: left; margin-left: 20px;">Le projet a pour but de développer un prototype de jeu interactif Mario Bros, où le personnage est contrôlé par les mouvements de la main détectés via un capteur capacitif. Ce projet combine des compétences en électronique, en programmation embarquée avec STM32, et en développement logiciel avec Python.</p>
+
+    <h2 style="text-align: left; margin-left: 20px;">Développement du Projet</h2>
+
+    <h3 style="text-align: left; margin-left: 20px;">Capteur Capacitif :</h3>
+    <p style="text-align: left; margin-left: 20px;"><strong>Fonctionnement des capteurs capacitifs</strong><br>
+    Un capteur capacitif est un dispositif électronique qui utilise la capacité électrique pour détecter divers types de changements dans son environnement. Le capteur convertit cette variation de capacité en un signal électrique, qui est ensuite analysé pour déterminer la nature de l’interaction.</p>
+
+    <p style="text-align: left; margin-left: 20px;"><strong>Application :</strong><br>
+    Dans ce projet, le joueur déplace sa main autour d'une électrode, modifiant ainsi la capacité détectée, ce qui est transformé en commandes pour le jeu.</p>
+
+    <h3 style="text-align: left; margin-left: 20px;">Circuit conditionneur</h3>
+
+    <p style="text-align: left; margin-left: 20px;"><strong>Fonction du circuit conditionneur :</strong><br>
+    Le circuit conditionneur permet l'adaptation et la transformation des signaux émis par le capteur capacitif pour qu'ils soient appropriés pour le traitement numérique par le microcontrôleur.</p>
+
+    <p style="text-align: left; margin-left: 20px;"><strong>Composants du circuit conditionneur :</strong></p>
+    <ul>
+        <li style="text-align: left; margin-left: 20px;"><strong>Convertisseur Tension-Courant :</strong> Ce composant transforme les variations de tension dues aux changements de capacité en un courant correspondant, facilitant ainsi le traitement ultérieur du signal.</li>
+        <li style="text-align: left; margin-left: 20px;"><strong>Comparateur à Hystérésis :</strong> Le comparateur compare la tension générée (issue de la conversion du courant) avec deux seuils de tension définis (haut et bas). Lorsque la tension dépasse le seuil haut, la sortie du comparateur bascule à un état haut. Lorsqu’elle redescend en dessous du seuil bas, la sortie bascule à un état bas. Ce comparateur est utilisé pour stabiliser le signal de sortie en éliminant les fluctuations mineures dues au bruit, ce qui empêche les commutations fréquentes entre les états haut et bas du signal.</li>
+        <li style="text-align: left; margin-left: 20px;"><strong>Oscillateur :</strong> La sortie du comparateur est renvoyée à l’entrée du convertisseur tension-courant. Cela signifie que le signal de sortie du comparateur influence directement le signal de tension initial. Cette interaction continue crée des oscillations stables.</li>
+    </ul>
+
+    <p style="text-align: left; margin-left: 20px;"><strong>Conception du circuit conditionneur :</strong><br>
+    Le circuit conditionneur a été conçu en utilisant le logiciel KiCad pour dessiner les schémas et créer le PCB.</p>
+
+    <h3 style="text-align: left; margin-left: 20px;">Microcontrôleur STM32 (Nucleo F301K8T6)</h3>
+    <p style="text-align: left; margin-left: 20px;">Sur la carte Nucleo, le microcontrôleur a été programmé pour convertir le signal analogique en sortie du circuit conditionneur en numérique (ADC). Il analyse ensuite les données pour calculer la fréquence d’oscillation du signal reçu. Cette fréquence est utilisée pour contrôler les déplacements de Mario dans le jeu : une augmentation de la fréquence provoque un déplacement à droite de Mario, simulant une main se rapprochant du capteur, tandis qu’une diminution entraîne un mouvement vers la gauche, correspondant à un éloignement de la main.</p>
+
+    <p style="text-align: left; margin-left: 20px;">Le jeu a été intégralement codé en Python. La lecture de la fréquence depuis le microcontrôleur se fait via une communication série.</p>
+
+    <p>
+        <a href="./pdfs/Proto.pdf" class="btn btn-primary btn-outline" target="_blank"> Learn more about this project here </a>
+    </p>
+</div>
+
+    
+    <!-- bas -->
+  <bas>
+    <div id="bas">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>
+              &copy; 
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              Yasmine Salmouni
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- jQuery -->
+<script src="js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="js/jquery.waypoints.min.js"></script>
+<!-- Owl Carousel -->
+<script src="js/owl.carousel.min.js"></script>
+<!-- Magnific Popup -->
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/magnific-popup-options.js"></script>
+
+<!-- Main JS (Do not remove) -->
+<script src="js/main.js"></script>
+</body>
+</html>

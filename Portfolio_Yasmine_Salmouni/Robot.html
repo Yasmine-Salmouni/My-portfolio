@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Yasmine Salmouni - Robot suiveur de ligne</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="shortcut icon" href="favicon.ico" />
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Karla:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet" />
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="css/animate.css" />
+  <!-- Icomoon Icon Fonts-->
+  <link rel="stylesheet" href="css/icomoon.css" />
+  <!-- Bootstrap  -->
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="css/magnific-popup.css" />
+  <!-- custom style -->
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Modernizr JS -->
+  <script src="js/modernizr-2.6.2.min.js"></script>
+  <!-- FOR IE9 below -->
+  <!--[if lt IE 9]>
+    <script src="js/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-decoration: none;
+      color: #000;
+      font-size: 24px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    .scroll-down:hover {
+      color: #555;
+    }
+
+    #colorlib-home {
+      padding-top: 100px; /* Ajustez cette valeur selon vos besoins */
+    }
+  </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="project.html">Projects</a></li>
+      </ul>
+    </nav> 
+     <!-- header -->
+     <header>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="colorlib-navbar-brand">
+              <a class="colorlib-logo" href="index.html">
+                <img src="images/logo.png" alt="Mon Logo" style="max-height: 100px;">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    <p> </p>
+    
+    <h1>Projet de Robot Suiveur de Ligne</h1>
+
+    <h2 style="text-align: left; margin-left: 20px;">1. Objectif du projet</h2>
+    <p style="text-align: left; margin-left: 20px;">Le projet consistait à développer un robot capable de suivre une trajectoire prédéfinie à l’aide de capteurs infrarouges détectant une ligne blanche réfléchissante sur un sol gris. Le robot devait maintenir une vitesse constante tout en suivant la ligne de manière autonome.</p>
+
+    <h2 style="text-align: left; margin-left: 20px;">2. Cahier des charges</h2>
+    <p style="text-align: left; margin-left: 20px;">L'objectif était de concevoir un robot répondant aux spécifications suivantes :</p>
+    <ul>
+        <li style="text-align: left; margin-left: 20px;">Vitesse constante : 10 cm/s.</li>
+        <li style="text-align: left; margin-left: 20px;">Précision de suivi de trajectoire : ±5 cm.</li>
+        <li style="text-align: left; margin-left: 20px;">Contrôle des moteurs : Utilisation de la modulation de largeur d’impulsion (PWM) avec une fréquence de 1 kHz.</li>
+    </ul>
+
+    <h2 style="text-align: left; margin-left: 20px;">3. Présentation du robot - Hardware</h2>
+    <p style="text-align: left; margin-left: 20px;">Le robot est équipé de plusieurs composants essentiels :</p>
+    <ul>
+        <li style="text-align: left; margin-left: 20px;"><strong>Carte microcontrôleur Nucleo L476RG :</strong> Cette carte a été utilisée pour contrôler les différents éléments du robot.</li>
+        <li style="text-align: left; margin-left: 20px;"><strong>Capteurs infrarouges :</strong> Deux capteurs infrarouges sont placés à l’avant du robot pour détecter la réflexion de la lumière sur une ligne blanche. Ces capteurs permettent au robot de suivre la ligne en temps réel.</li>
+        <li style="text-align: left; margin-left: 20px;"><strong>Moteurs à chenilles :</strong> Le robot se déplace grâce à deux moteurs à chenilles contrôlés via une modulation de largeur d’impulsion (PWM).</li>
+        <li style="text-align: left; margin-left: 20px;"><strong>Batterie :</strong> Le robot est alimenté par une batterie surveillée en permanence pour éviter les pannes dues à une décharge excessive.</li>
+    </ul>
+
+    <h2 style="text-align: left; margin-left: 20px;">4. Surveillance de la batterie via ADC avec un analog watchdog</h2>
+    <p style="text-align: left; margin-left: 20px;">Le système utilise un ADC pour convertir la tension de la batterie en une valeur numérique que le microcontrôleur peut lire et surveiller. Un analog watchdog est configuré pour déclencher une alerte si la tension de la batterie dépasse les seuils prédéfinis hauts ou bas. Ce qui protège le robot contre les conditions de batterie faible ou surchargée, évitant ainsi les arrêts inattendus ou les dommages au système.</p>
+
+    <h2 style="text-align: left; margin-left: 20px;">5. Développement du code</h2>
+    <p style="text-align: left; margin-left: 20px;">Le développement du code a été réalisé avec l’environnement de développement intégré (IDE) STM32CubeIDE, utilisant le langage C. Voici les principaux composants du développement du code :</p>
+
+    <h3 style="text-align: left; margin-left: 20px;">Boucle Principale</h3>
+    <p style="text-align: left; margin-left: 20px;">Initialement, les LEDs émettrices des capteurs sont activées, suivies par le lancement du timer 6 (Le timer 6 génère des interruptions à intervalles réguliers pour initier les conversions ADC qui mesurent les valeurs des capteurs et de la batterie du robot). Les moteurs sont ensuite mis en marche avec un rapport cyclique ajusté à 23000, basé sur des mesures expérimentales effectuées avec un chronomètre et un mètre. La logique de traitement des signaux captés par les capteurs 3 et 4 est mise en œuvre comme suit :</p>
+    <ul>
+        <li style="text-align: left; margin-left: 20px;">Lorsque la valeur détectée par le capteur 3 (capteur gauche) est inférieure au seuil établi, indiquant la présence de gris, le moteur gauche recule tandis que le moteur droit avance, permettant ainsi au robot de se réaligner correctement avec la ligne.</li>
+        <li style="text-align: left; margin-left: 20px;">Si c’est le capteur 4 (capteur droit) qui détecte une valeur inférieure au seuil, les moteurs ajustent leurs mouvements de façon inverse : le moteur gauche avance et le moteur droit recule.</li>
+        <li style="text-align: left; margin-left: 20px;">Si les deux capteurs détectent le blanc, cela indique que le robot doit continuer à avancer sans ajustement.</li>
+        <li style="text-align: left; margin-left: 20px;">En cas de détection du gris par les deux capteurs, le robot s’arrête, jusqu’à ce que l’un des capteurs détecte la trajectoire à nouveau.</li>
+    </ul>
+    <p style="text-align: left; margin-left: 20px;">Ces opérations sont effectuées à condition que la variable <code>start</code> soit activée (valeur de 1). Si <code>start</code> est désactivée (valeur de 0), les moteurs s’arrêtent, plaçant le robot en état de pause.</p>
+
+    <h3 style="text-align: left; margin-left: 20px;">Les interruptions du projet</h3>
+    <p style="text-align: left; margin-left: 20px;">Dans notre projet, quatre callbacks principaux ont été implémentés :</p>
+    <ul>
+        <li style="text-align: left; margin-left: 20px;"><strong>Callback de l’analog watchdog :</strong> Ce callback est activé lorsque la tension de la batterie descend en dessous d’un seuil prédéfini. Il a pour rôle d’allumer la LED LD2 (configurée en sortie GPIO), servant ainsi d’indicateur visuel pour prévenir l’utilisateur que la batterie est faible.</li>
+        <li style="text-align: left; margin-left: 20px;"><strong>Callback du timer6 :</strong> Déclenché toutes les 10 millisecondes, ce callback est essentiel pour initier les conversions ADC à intervalles réguliers, garantissant ainsi une surveillance continue des capteurs et de la batterie.</li>
+        <li style="text-align: left; margin-left: 20px;"><strong>Callback lié au bouton start :</strong> Ce callback est exécuté à chaque pression sur le bouton bleu. Il modifie l’état de la variable <code>start</code> en utilisant un XOR avec 1, permettant ainsi de basculer entre l’état actif et inactif du robot.</li>
+        <li style="text-align: left; margin-left: 20px;"><strong>Callback de fin de conversion ADC :</strong> Il est appelé après chaque conversion complète par l’ADC : il incrémente le compteur <code>cpt</code>, stocke la valeur de l’ADC en fonction de ce compteur, et réinitialise le compteur après trois conversions pour préparer le cycle suivant.</li>
+    </ul>
+
+    <h2 style="text-align: left; margin-left: 20px;">6. Options supplémentaires</h2>
+    <p style="text-align: left; margin-left: 20px;"><strong>Filtre anti-rebond :</strong> Un filtre anti-rebond a été ajouté pour éviter que des interruptions multiples soient déclenchées lors de l’appui sur le bouton de démarrage. Ce filtre empêche les erreurs en ne prenant en compte que la première pression.</p>
+    <p>
+        <a href="./pdfs/Robot.pdf" class="btn btn-primary btn-outline" target="_blank"> Learn more about this project here </a>
+    </p>
+</div>
+
+    
+    <!-- bas -->
+  <bas>
+    <div id="bas">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>
+              &copy; 
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              Yasmine Salmouni
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- jQuery -->
+<script src="js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="js/jquery.waypoints.min.js"></script>
+<!-- Owl Carousel -->
+<script src="js/owl.carousel.min.js"></script>
+<!-- Magnific Popup -->
+<script src="js/jquery.magnific-popup.min.js"></script>
+<script src="js/magnific-popup-options.js"></script>
+
+<!-- Main JS (Do not remove) -->
+<script src="js/main.js"></script>
+</body>
+</html>
+
